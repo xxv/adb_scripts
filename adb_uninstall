@@ -1,0 +1,19 @@
+#!/bin/sh
+
+if [ $# -lt 1 ]; then
+  echo "Usage: $0 PACKAGE_REGEX [DEVICE_ID]"
+  echo
+  echo "Uninstalls the packages matching PACKAGE_REGEX from the connected device"
+  echo "(optionally specified by DEVICE_ID)."
+  exit 1
+fi
+
+pattern="$1"
+device="$2"
+
+if [ -n "${device}" ]; then
+  device_with_flag="-s ${device}"
+fi
+
+adb_grep_packages "${pattern}" "${device}" |xargs --no-run-if-empty -n 1 --verbose adb ${device_with_flag} uninstall
+

@@ -1,0 +1,18 @@
+#!/bin/sh
+
+if [ $# -lt 1 ]; then
+  echo "Usage: $0 PACKAGE_REGEX [DEVICE_ID]"
+  echo
+  echo "Lists the packages installed on the connected device (optionally"
+  echo "specified by DEVICE_ID) filtered with PACKAGE_REGEX."
+  exit 1
+fi
+
+pattern="$1"
+
+if [ -n "$2" ]; then
+  device="-s $2"
+fi
+
+adb ${device} shell 'pm list packages -f' | tr -d '\15\32' | sed -e 's/.*=//'|grep "${pattern}"
+

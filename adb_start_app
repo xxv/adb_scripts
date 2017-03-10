@@ -1,0 +1,18 @@
+#!/bin/sh
+
+if [ $# -lt 1 ]; then
+  echo "Usage: $0 PACKAGE_NAME [DEVICE_ID]"
+  echo
+  echo "Launches the default activity for the given package on the connected device"
+  echo "(optionally specified by DEVICE_ID)."
+  exit 1
+fi
+
+package="$1"
+device="$2"
+
+if [ -n "${device}" ]; then
+  device_with_flag="-s ${device}"
+fi
+
+adb ${device_with_flag} shell monkey -p "${package}" -c android.intent.category.LAUNCHER 1
