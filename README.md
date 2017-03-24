@@ -21,4 +21,10 @@ adb_uninstall
 Uninstall all the packages (e.g. testing packages) matching a given regular
 expression.
 
+adb_app_login
+-------------
+
+CLI tool to make it easier to type login credentials into an app on a connected
+device. May need to be modified for your specific login form.
+
 Thanks to Joe Mahon for his contributions to the scripts.
