@@ -1,0 +1,14 @@
+#!/bin/sh
+
+user="$1"
+phone="$2"
+
+echo "Please enter your password"
+
+read -s pw
+
+if [ -n "${phone}" ]; then
+    phone="-s ${phone}"
+fi
+
+adb ${phone} shell input text "${user}"\; input keyevent KEYCODE_TAB\; input text "${pw}" \; input keyevent KEYCODE_ENTER
